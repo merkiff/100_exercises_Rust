@@ -8,7 +8,8 @@
 pub fn speed(start: u32, end: u32, time_elapsed: u32) -> u32 {
     // TODO: define a variable named `distance` with the right value to get tests to pass
     //  Do you need to annotate the type of `distance`? Why or why not?
-
+    //end와 start가 u32이므로, 이 값만을 이용한 변수 distance는 컴파일러가 자동으로 타입을 추론할 수 있을 것
+    let distance = end - start;
     // Don't change the line below
     distance / time_elapsed
 }
