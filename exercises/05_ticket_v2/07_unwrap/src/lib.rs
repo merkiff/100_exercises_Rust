@@ -2,7 +2,21 @@
 //   When the description is invalid, instead, it should use a default description:
 //   "Description not provided".
 fn easy_ticket(title: String, description: String, status: Status) -> Ticket {
-    todo!()
+    match Ticket::new(title.clone(), description.clone(), status.clone()) {
+        //Ticket::new 함수는 Result를 반환하므로 match는 Ok, Err 처리
+        Ok(ticket) => ticket,
+        Err(error) => {
+            //error에 Description이 포함되어 있으면
+            //새로운 defalut description을 담아 반환 
+            //unwrap은 Ok, Some이면 값을 추출하고
+            //None, Err이면 panic 발생
+            if error.contains("Description") {
+                Ticket::new(title, "Description not provided".to_string(), status).unwrap()
+            } else {
+                panic!("{error}");;
+            }
+        }
+    }
 }
 
 #[derive(Debug, PartialEq, Clone)]

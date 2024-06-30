@@ -38,7 +38,13 @@ impl Ticket {
         }
     }
     pub fn assigned_to(&self) -> &str {
-        todo!()
+        //match에서 Status의 소유권 이동 발생 -> 참조 필요
+        match &self.status {
+            Status::InProgress { assigned_to } => assigned_to,
+            Status::ToDo | Status::Done => {
+                panic!("Only `In-Progress` tickets can be assigned to someone");
+            }
+        }
     }
 }
 
